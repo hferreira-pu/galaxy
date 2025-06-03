@@ -38,6 +38,8 @@ public class Company extends AbstractEntity implements Serializable {
     @JoinColumn(name = "parent_id")
     private Company parent;
 
+    private String preferences;
+
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Company> children;
 
@@ -65,7 +67,7 @@ public class Company extends AbstractEntity implements Serializable {
 
     public Company(String phone, String facebook, String email, String vatNumber, String customField,
                    String street, String zip, String town, String country,
-                   Image selectedAvatar, Company parent) {
+                   Image selectedAvatar, Company parent, String preferences) {
         this.phone = phone;
         this.facebook = facebook;
         this.email = email;
@@ -77,6 +79,7 @@ public class Company extends AbstractEntity implements Serializable {
         this.country = country;
         this.selectedAvatar = selectedAvatar;
         this.parent = parent;
+        this.preferences = preferences;
     }
 
 
@@ -171,11 +174,19 @@ public class Company extends AbstractEntity implements Serializable {
         return parent;
     }
 
+    public String getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(String preferences) {
+        this.preferences = preferences;
+    }
+
     public void setParent(final Company parent) {
         assertNotNull(parent);
         assertNotNull(parent.getId());
 
-        if (parent.getId().equals(this.getId())) {
+        if(parent.getId().equals(this.getId())) {
             throw new IllegalArgumentException("Cannot set parent with same id as current object");
         }
 
@@ -201,7 +212,7 @@ public class Company extends AbstractEntity implements Serializable {
     }
 
     public void addAvatar(final Image avatar) {
-        if (this.getAvatars() == null) {
+        if(this.getAvatars() == null) {
             this.setAvatars(new ArrayList<>(1));
         }
 

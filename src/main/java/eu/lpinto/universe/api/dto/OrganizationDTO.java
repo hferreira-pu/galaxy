@@ -30,6 +30,7 @@ public class OrganizationDTO extends AbstractDTO implements Serializable {
     private Long selectedAvatar;
     private List<Long> avatars;
     private String customField;
+    private String preferences;
 
 
     /*
@@ -46,7 +47,7 @@ public class OrganizationDTO extends AbstractDTO implements Serializable {
     public OrganizationDTO(String country, String clientID, String clientSecret, Boolean enable,
                            String email, String fax, String phone, String street,
                            String town, String zip, String website, List<Long> workers,
-                           Long company, Long externalID, String calendarID, Long selectedAvatar, List<Long> avatars, String billingID) {
+                           Long company, Long externalID, String calendarID, Long selectedAvatar, List<Long> avatars, String billingID, String preferences) {
         this.country = country;
         this.clientID = clientID;
         this.clientSecret = clientSecret;
@@ -65,6 +66,7 @@ public class OrganizationDTO extends AbstractDTO implements Serializable {
         this.selectedAvatar = selectedAvatar;
         this.avatars = avatars;
         this.customField = billingID;
+        this.preferences = preferences;
     }
 
     public String getCountry() {
@@ -209,5 +211,13 @@ public class OrganizationDTO extends AbstractDTO implements Serializable {
 
     public void setCustomField(String customField) {
         this.customField = customField;
+    }
+
+    public String getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(String preferences) {
+        this.preferences = preferences;
     }
 }

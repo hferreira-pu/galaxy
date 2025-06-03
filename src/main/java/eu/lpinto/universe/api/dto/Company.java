@@ -25,6 +25,7 @@ public class Company extends AbstractDTO implements Serializable {
 
     private Long avatar;
     private Long parent;
+    private String preferences;
 
     private List<Long> children;
     private List<Long> avatars;
@@ -41,7 +42,7 @@ public class Company extends AbstractDTO implements Serializable {
 
     public Company(String phone, String facebook, String email, String vatNumber, String customField,
                    String street, String zip, String town, String country,
-                   Long avatar, Long parent) {
+                   Long avatar, Long parent, String preferences) {
         this.phone = phone;
         this.facebook = facebook;
         this.email = email;
@@ -53,6 +54,7 @@ public class Company extends AbstractDTO implements Serializable {
         this.country = country;
         this.avatar = avatar;
         this.parent = parent;
+        this.preferences = preferences;
     }
 
     /*
@@ -140,6 +142,14 @@ public class Company extends AbstractDTO implements Serializable {
 
     public Long getParent() {
         return parent;
+    }
+
+    public String getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(String preferences) {
+        this.preferences = preferences;
     }
 
     public void setParent(Long parent) {

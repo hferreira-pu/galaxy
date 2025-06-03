@@ -69,6 +69,8 @@ public class Organization extends AbstractEntity implements Serializable, Univer
     @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
     private List<OrganizationFeature> features;
 
+    private String preferences;
+
     /*
      * Constructors
      */
@@ -83,7 +85,7 @@ public class Organization extends AbstractEntity implements Serializable, Univer
                         Boolean enable, String email, Long externalID, String fax, String phone,
                         String street, String town, String zip, String website, List<Worker> workers,
                         Company company, String calendarID, Image selectedAvatar, List<Image> avatars, String billingID,
-                        String name, User creator, Calendar created, User updater, Calendar updated, Long id) {
+                        String preferences, String name, User creator, Calendar created, User updater, Calendar updated, Long id) {
         super(name, creator, created, updater, updated, id);
         this.country = country;
         this.clientID = clientID;
@@ -103,10 +105,11 @@ public class Organization extends AbstractEntity implements Serializable, Univer
         this.selectedAvatar = selectedAvatar;
         this.avatars = avatars;
         this.customField = billingID;
+        this.preferences = preferences;
     }
 
     public Boolean hasFeature(final String featureName) {
-        if (features == null || features.isEmpty()) {
+        if(features == null || features.isEmpty()) {
             return false;
         }
 
@@ -249,7 +252,7 @@ public class Organization extends AbstractEntity implements Serializable, Univer
     }
 
     public void addAvatar(final Image avatar) {
-        if (this.avatars == null) {
+        if(this.avatars == null) {
             this.avatars = new ArrayList<>(1);
         }
 
@@ -266,5 +269,13 @@ public class Organization extends AbstractEntity implements Serializable, Univer
 
     public void setCustomField(String customField) {
         this.customField = customField;
+    }
+
+    public String getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(String preferences) {
+        this.preferences = preferences;
     }
 }

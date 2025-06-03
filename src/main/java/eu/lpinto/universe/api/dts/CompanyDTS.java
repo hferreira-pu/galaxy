@@ -13,11 +13,11 @@ public class CompanyDTS extends AbstractDTS<Company, eu.lpinto.universe.api.dto.
 
     @Override
     protected eu.lpinto.universe.api.dto.Company buildDTO(Company entity) {
-        if (entity == null) {
+        if(entity == null) {
             return null;
         }
 
-        if (entity.isFull()) {
+        if(entity.isFull()) {
             return new eu.lpinto.universe.api.dto.Company(
                     entity.getPhone(),
                     entity.getFacebook(),
@@ -29,7 +29,8 @@ public class CompanyDTS extends AbstractDTS<Company, eu.lpinto.universe.api.dto.
                     entity.getTown(),
                     entity.getCountry(),
                     ImageDTS.toApiID(entity.getSelectedAvatar()),
-                    CompanyDTS.toApiID(entity.getParent())
+                    CompanyDTS.toApiID(entity.getParent()),
+                    entity.getPreferences()
             );
 
         } else {
@@ -44,14 +45,15 @@ public class CompanyDTS extends AbstractDTS<Company, eu.lpinto.universe.api.dto.
                     entity.getTown(),
                     entity.getCountry(),
                     null,
-                    null
+                    null,
+                    entity.getPreferences()
             );
         }
     }
 
     @Override
     public Company toDomain(Long id) {
-        if (id == null) {
+        if(id == null) {
             return null;
         }
 
@@ -70,6 +72,7 @@ public class CompanyDTS extends AbstractDTS<Company, eu.lpinto.universe.api.dto.
                            dto.getTown(),
                            dto.getCountry(),
                            ImageDTS.T.toDomain(dto.getAvatar()),
-                           CompanyDTS.T.toDomain(dto.getParent()));
+                           CompanyDTS.T.toDomain(dto.getParent()),
+                           dto.getPreferences());
     }
 }

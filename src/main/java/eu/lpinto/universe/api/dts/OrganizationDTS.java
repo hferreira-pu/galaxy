@@ -15,9 +15,9 @@ public class OrganizationDTS extends AbstractDTS<Organization, OrganizationDTO> 
 
     @Override
     protected OrganizationDTO buildDTO(Organization entity) {
-        if (entity == null) {
+        if(entity == null) {
             return null;
-        } else if (entity.isFull()) {
+        } else if(entity.isFull()) {
             return new OrganizationDTO(
                     entity.getCountry(),
                     entity.getClientID(),
@@ -36,7 +36,8 @@ public class OrganizationDTS extends AbstractDTS<Organization, OrganizationDTO> 
                     entity.getCalendarID(),
                     AbstractDTS.toApiID(entity.getSelectedAvatar()),
                     AbstractDTS.toApiID(entity.getAvatars()),
-                    entity.getCustomField()
+                    entity.getCustomField(),
+                    entity.getPreferences()
             );
 
         } else {
@@ -58,14 +59,15 @@ public class OrganizationDTS extends AbstractDTS<Organization, OrganizationDTO> 
                     entity.getCalendarID(),
                     AbstractDTS.toApiID(entity.getSelectedAvatar()),
                     null,
-                    entity.getCustomField()
+                    entity.getCustomField(),
+                    entity.getPreferences()
             );
         }
     }
 
     @Override
     public Organization toDomain(Long id) {
-        if (id == null) {
+        if(id == null) {
             return null;
         }
 
@@ -93,6 +95,7 @@ public class OrganizationDTS extends AbstractDTS<Organization, OrganizationDTO> 
                 ImageDTS.T.toDomain(dto.getSelectedAvatar()),
                 ImageDTS.T.toEntitiesID(dto.getAvatars()),
                 dto.getCustomField(),
+                dto.getPreferences(),
                 dto.getName(),
                 UserDTS.T.toDomain(dto.getCreator()),
                 dto.getCreated(),
